@@ -5,7 +5,8 @@ import java.util.Arrays;
 public class CustomArrayList<T> implements CustomList<T> {
 	Object[] items = new Object[10];
 	private Integer size = 0;
-	@Override
+
+	@Override//
 	public boolean add(T item) {
 		if (size == items.length) {
 			resizeArray();
@@ -13,22 +14,46 @@ public class CustomArrayList<T> implements CustomList<T> {
 		items [size++] = item;
 		return true;
 	}
-
-	private void resizeArray() {
-		items = Arrays.copyOf(items, items.length * 2);
+	
+	@Override //New method 
+	public boolean add(int index, T item) throws IndexOutOfBoundsException {
+		if (index > size || index < 0) {
+			throw new IndexOutOfBoundsException("Index: " + index + "size: " + size);
+		} if (size == items.length) {
+			resizeArray();
+		}
+		System.arraycopy(item, index, item, index + 1, size - index);
+		items [index] = item;
+		size++;
+		return true; 
 	}
 
-	@Override
+
+	@Override //
 	public int getSize() {
 		return size;
 	}
 
-	@Override
-	public T get(int index) {
+	@SuppressWarnings("unchecked")
+	@Override //Already exited in Assignment 5, added IndexOutofBoundsException
+	public T get(int index) throws IndexOutOfBoundsException{
 		if (index >= size || index < 0) {
-			throw new IndexOutOfBoundsException("Index : " + index + "Size: " + size);
+			throw new IndexOutOfBoundsException("Index : " + index + " Size: " + size);
 		}
 		return (T) items[index];
+	}
+
+
+	@Override // New method
+	public T remove(int index) throws IndexOutOfBoundsException {
+		if (index >= size || index <0) {
+			throw new IndexOutOfBoundsException("Index: " + index + " Size: " + size);
+		}
+		return null;
+	}
+	
+	private void resizeArray() { //
+		items = Arrays.copyOf(items, items.length * 2);
 	}
 	
 }
