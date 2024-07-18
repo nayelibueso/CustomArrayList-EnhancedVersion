@@ -1,6 +1,7 @@
 package com.coderscampus.arraylist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ public class CustomArrayListTest {
 	}
 	
 	@Test
-	void test_Remove () {
+	void test_Remove () { //Test an element can be removed from a specific index and that elemenys shift correctly
 		list.add(1);
 		list.add(2);
 		list.add(3);
@@ -65,6 +66,14 @@ public class CustomArrayListTest {
 		assertEquals(2, list.getSize());
 		assertEquals(1, list.get(0));
 		assertEquals(3, list.get(1));
+	}
+	
+	@Test 
+	void get_Index_Out_of_Bound () {
+		try {
+			list.get(0);
+		} //Start here 
+		//Ensure other tests are following along with method order 
 	}
 	
 }
