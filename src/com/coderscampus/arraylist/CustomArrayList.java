@@ -8,11 +8,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 
 	@Override
 	public boolean add(T item) {
-		if (size == items.length) {
-			resizeArray();
-		}
-		items[size++] = item;
-		return true;
+		return add(size, item);
 	}
 
 	@Override
@@ -28,7 +24,9 @@ public class CustomArrayList<T> implements CustomList<T> {
 		if (size == items.length) {
 			resizeArray();
 		}
-		System.arraycopy(items, index, items, index + 1, size - index);
+		for (int i = size; i > index; i--) {
+			items[i] = items[i-1];
+		}
 		items[index] = item;
 		size++;
 		return true;
